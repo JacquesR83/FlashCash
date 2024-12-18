@@ -9,8 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
-
 public class SpringSecurityConfig {
 
     @Bean
@@ -18,17 +16,18 @@ public class SpringSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/signin", "/signup", "/index.css", "/images/**")
+                        .requestMatchers("/signin", "/signup", "/static/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated()
                 )
                 .formLogin((form) -> form
                         // customized login form
-                        .loginPage("signin")
+                        .loginPage("/signin")
                         // username is default field and is changed here (=> checked field in the HTML form login page)
                         .permitAll().usernameParameter("email")
                         // when successful, goes to "/" URL, => always

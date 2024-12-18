@@ -1,0 +1,62 @@
+/* Animation et effet de focus */
+@keyframes inputFocus {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Style global de la page de connexion */
+.signin-form {
+    background: linear-gradient(135deg, #508bfc 0%, #2575fc 100%);
+}
+
+.login-card {
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+/* Style des boutons sociaux */
+.btn-google {
+    background-color: #dd4b39;
+    color: white;
+}
+
+.btn-facebook {
+    background-color: #3b5998;
+    color: white;
+}
+
+/* Effet de mise au point des inputs */
+.form-outline .form-control:focus {
+    animation: inputFocus 0.5s ease;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+/* Effet de survol des boutons */
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Style du logo */
+.logo-card img {
+    max-width: 150px;
+    transition: transform 0.3s ease;
+}
+
+.logo-card img:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .login-card {
+        padding: 2rem 1rem !important;
+    }
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign up </title>
+  <link th:href = "@{/static/css/mdb.min.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<section class="vh-100" style="background-color: #508bfc;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+            <h2 class="card-title text-center mb-5 fw-bold fs-5">Sign up</h2>
+
+            <form th:action="@{/signup}" method="post" th:object ="${user}">
+
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="text" id="firstname"  th:field ="*{firstname}" class="form-control form-control-lg"  />
+                <label class="form-label" for="firstname">Firstname</label>
+                <div th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" class="text-danger"></div>
+              </div>
+
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="text" id="lastname" th:field ="*{lastname}" class="form-control form-control-lg" />
+                <label class="form-label" for="lastname" >Lastname</label>
+                <div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" class="text-danger"></div>
+              </div>
+
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="email" id="email" th:field ="*{email}" class="form-control form-control-lg" />
+                <label class="form-label" for="email" >E-mail</label>
+              </div>
+
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="password" id = "password" th:field ="*{password}" class="form-control form-control-lg" />
+                <label class="form-label" for="password" >Password</label>
+              </div>
+
+              <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Sign up</button>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

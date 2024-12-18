@@ -5,14 +5,17 @@ import lombok.Data;
 
 @Data
 @Entity
+
 public class Link {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    Integer id;
+
     @ManyToOne
-    private User user1;
+    User user1;
+
     @ManyToOne
-    private User user2;
+    User user2;
 
 }

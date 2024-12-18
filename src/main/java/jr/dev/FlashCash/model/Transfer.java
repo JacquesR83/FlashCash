@@ -1,12 +1,7 @@
 package jr.dev.FlashCash.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import jr.dev.FlashCash.model.enums.Status;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDateTime;
 
 @Data
@@ -22,7 +17,7 @@ public class Transfer {
     private Double amountBeforeFee;
     private Double amountAfterFee;
 
-    @Size(max = 255, message = "Description must not exceed 255 characters")
+//    @Size(max = 255, message = "Description must not exceed 255 characters")
     private String description;
 
     @ManyToOne

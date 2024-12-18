@@ -9,15 +9,14 @@ import lombok.*;
 public class UserAccount {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer accountId;
 
     private Double balance;
 
-    @Column (unique = true, nullable = false)
-    private String iban;
 //    @Column (unique = true, nullable = false)
-//    private String accountNumber;
+    private String iban;
+
 
     public UserAccount plus(double amount) {
         this.balance += amount;

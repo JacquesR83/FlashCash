@@ -20,10 +20,10 @@
                         </div>
                         <h2 class="card-title text-center mb-5 fw-bold fs-5">Deposit your Cash </h2>
 
-                        <form th:action="@{/addcash}" method="post" th:object="${account}">
+                        <form th:action="@{/addcash/validate}" method="post" th:object="${account}">
 
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="number" th:field="balance" id="balance" class="form-outline form-control-color" placeholder="Amount to receive"/>
+                                <input type="number" th:field="*{balance}" id="balance" class="form-outline form-control-color" placeholder="Amount to receive"/>
                             </div>
 
                             <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Deposit</button>

@@ -33,7 +33,6 @@ public class UserController {
         if(result.hasErrors()){
             return "signup";
         }
-
         try{
             userService.saveUser(user);
         }

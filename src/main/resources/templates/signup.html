@@ -2,48 +2,126 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Sign up </title>
-  <link th:href = "@{/static/css/mdb.min.css}" rel="stylesheet"/>
-</head>
-<body>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sign up for Flash Cash - Your Digital Payment Solution">
+  <title>Sign up | Flash Cash</title>
 
+  <!-- CSS Dependencies -->
+  <link th:href="@{css/mdb.min.css}" rel="stylesheet">
+  <link th:href="@{css/signin.css}" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="signin-form">
 <section class="vh-100" style="background-color: #508bfc;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
         <div class="card shadow-2-strong" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
+            <!-- Logo -->
+            <div class="logo-card">
+              <img class="w-25 pb-3" th:src="@{/css/images/logo.png}" alt="Flash Cash Logo">
+            </div>
 
-            <h2 class="card-title text-center mb-5 fw-bold fs-5">Sign up</h2>
+            <h1 class="card-title h4 mb-5 fw-bold">Sign up for Flash Cash</h1>
 
-            <form th:action="@{/signup}" method="post" th:object ="${user}">
-
+            <!-- Sign-up Form -->
+            <form th:action="@{/signup}" method="post" th:object="${user}" class="needs-validation" novalidate>
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="text" id="firstname"  th:field ="*{firstname}" class="form-control form-control-lg"  />
-                <label class="form-label" for="firstname">Firstname</label>
-                <div th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" class="text-danger"></div>
+                <input
+                        type="text"
+                        id="firstname"
+                        th:field="*{firstname}"
+                        class="form-outline form-control-color"
+                        placeholder="First name"
+                        required
+                        autofocus>
+                <div class="invalid-feedback text-start">
+                  Please enter your first name
+                </div>
+                <div th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" class="text-danger text-start"></div>
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="text" id="lastname" th:field ="*{lastname}" class="form-control form-control-lg" />
-                <label class="form-label" for="lastname" >Lastname</label>
-                <div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" class="text-danger"></div>
+                <input
+                        type="text"
+                        id="lastname"
+                        th:field="*{lastname}"
+                        class="form-outline form-control-color"
+                        placeholder="Last name"
+                        required>
+                <div class="invalid-feedback text-start">
+                  Please enter your last name
+                </div>
+                <div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" class="text-danger text-start"></div>
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="email" id="email" th:field ="*{email}" class="form-control form-control-lg" />
-                <label class="form-label" for="email" >E-mail</label>
+                <input
+                        type="email"
+                        id="email"
+                        th:field="*{email}"
+                        class="form-outline form-control-color"
+                        placeholder="E-mail address"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        required>
+                <div class="invalid-feedback text-start">
+                  Please enter a valid email address
+                </div>
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger text-start"></div>
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="password" id = "password" th:field ="*{password}" class="form-control form-control-lg" />
-                <label class="form-label" for="password" >Password</label>
+                <input
+                        type="password"
+                        id="password"
+                        th:field="*{password}"
+                        class="form-outline form-control-color"
+                        placeholder="Password"
+                        minlength="8"
+                        required>
+                <div class="invalid-feedback text-start">
+                  Password must be at least 8 characters long
+                </div>
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger text-start"></div>
               </div>
 
-              <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Sign up</button>
+              <button
+                      data-mdb-ripple-init
+                      class="btn btn-primary btn-lg w-100"
+                      type="submit">
+                Create account
+              </button>
 
+              <p class="mt-3 mb-0">
+                Already have an account?
+                <a href="/signin" class="text-primary">Sign in</a>
+              </p>
             </form>
 
+            <hr class="my-4">
+
+<!--            &lt;!&ndash; Social Sign-up &ndash;&gt;-->
+<!--            <div class="social-signin">-->
+<!--              <button-->
+<!--                      data-mdb-ripple-init-->
+<!--                      class="btn btn-lg w-100 mb-3"-->
+<!--                      style="background-color: #dd4b39; color: white;"-->
+<!--                      type="button"-->
+<!--                      onclick="signUpWithGoogle()">-->
+<!--                <i class="fab fa-google me-2"></i> Continue with Google-->
+<!--              </button>-->
+
+<!--              <button-->
+<!--                      data-mdb-ripple-init-->
+<!--                      class="btn btn-lg w-100"-->
+<!--                      style="background-color: #3b5998; color: white;"-->
+<!--                      type="button"-->
+<!--                      onclick="signUpWithFacebook()">-->
+<!--                <i class="fab fa-facebook-f me-2"></i> Continue with Facebook-->
+<!--              </button>-->
+            </div>
           </div>
         </div>
       </div>
@@ -51,5 +129,34 @@
   </div>
 </section>
 
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.js"></script>
+<script>
+  // Form validation
+  (() => {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+
+  // Social sign-up handlers
+  function signUpWithGoogle() {
+    // Implement Google sign-up logic
+    console.log('Google sign-up clicked');
+  }
+
+  function signUpWithFacebook() {
+    // Implement Facebook sign-up logic
+    console.log('Facebook sign-up clicked');
+  }
+</script>
 </body>
 </html>

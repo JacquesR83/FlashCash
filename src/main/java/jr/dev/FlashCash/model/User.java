@@ -2,13 +2,14 @@ package jr.dev.FlashCash.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
+import java.util.Collection;
 import java.util.List;
 
 @Data
 @Entity
-
-public class User {
+public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -29,4 +30,4 @@ public class User {
     @OneToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private UserAccount account;
 
-    }
+}

@@ -28,7 +28,4 @@ public class UserAccount {
         return this;
     }
 
-
-
-
 }

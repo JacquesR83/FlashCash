@@ -2,6 +2,7 @@ package jr.dev.FlashCash.controller;
 
 //import jakarta.validation.Valid;
 import jr.dev.FlashCash.model.User;
+import jr.dev.FlashCash.model.dto.SignUpForm;
 import jr.dev.FlashCash.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,13 +29,13 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String processSignUp(@ModelAttribute("user") User user,
+    public String processSignUp(@ModelAttribute("user") SignUpForm form,
                                 BindingResult result){
         if(result.hasErrors()){
             return "signup";
         }
         try{
-            userService.saveUser(user);
+            userService.registration(form);
         }
         catch(RuntimeException e){
             result.rejectValue("email", "error", "email already exists");

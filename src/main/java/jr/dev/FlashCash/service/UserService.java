@@ -1,6 +1,8 @@
 package jr.dev.FlashCash.service;
 
 import jr.dev.FlashCash.model.User;
+import jr.dev.FlashCash.model.UserAccount;
+import jr.dev.FlashCash.model.dto.SignUpForm;
 import jr.dev.FlashCash.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,14 +20,16 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User saveUser(User user){
-        if(userRepository.findUserByEmail(user.getEmail()).isPresent()){
-            throw new RuntimeException("Email already exists");
+    public User registration(SignUpForm form){
+            User user = new User();
+            UserAccount account = new UserAccount();
+            account.setAmount(0.0);
+            user.setAccount(account);
+            user.setFirstname(form.getFirstname());
+            user.setLastname(form.getLastname());
+            user.setEmail(form.getEmail());
+            user.setPassword(passwordEncoder.encode(form.getPassword()));
+            return userRepository.save(user);
         }
-        //Set encoded password
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
     }
 
-
-}

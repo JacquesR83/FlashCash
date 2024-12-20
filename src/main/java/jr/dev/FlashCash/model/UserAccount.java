@@ -12,19 +12,19 @@ public class UserAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer accountId;
 
-    private Double balance;
+    private Double amount;
 
 //    @Column (unique = true, nullable = false)
     private String iban;
 
 
     public UserAccount plus(double amount) {
-        this.balance += amount;
+        this.amount += amount;
         return this;
     }
 
     public UserAccount minus(double amount){
-        this.balance -= amount;
+        this.amount -= amount;
         return this;
     }
 

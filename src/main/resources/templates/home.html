@@ -4,7 +4,28 @@
     <title>Account Update</title>
 </head>
 <body>
-<h1>Account Updated</h1>
-<p>New balance: <span th:text="${account.amount}"></span></p>
+<h1>Account Balance</h1>
+<p>New balance: <span th:text="${user.getAccount().getAmount()}"></span></p>
+
+<h1>Connexions</h1>
+<p>Connexion List: <span th:text="${user.getAccount().getAmount()}"></span></p>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>firstname</th>
+            <th>lastname</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="connexionList : ${friend}"> // Field to complete
+                <td style="width: 10%" th:text="${friend.firstname}"></td>
+                <td th:text="${friend.lastname}"></td>
+                <td style="width: 15%" class="text-center">
+                    <a th:href="@{/bidList/update/{id}(id=${bidList.bidListId})}">Send Money</a> |
+<!--                    <a th:href="@{/bidList/delete/{id}(id=${bidList.bidListId})}">Delete</a>-->
+                </td>
+            </tr>
+        <tbody>
+    </table>
 </body>
 </html>

@@ -22,22 +22,5 @@ public class UserAccountService {
         this.sessionService = sessionService;
     }
 
-    @Transactional
-    public UserAccount addingMoney(double newAmount) {
-        User user = sessionService.sessionUser();
-        UserAccount userAccount = user.getAccount();
-        userAccount.plus(newAmount);
-        userRepository.save(user);
-        return userAccount;
-    }
-
-    @Transactional
-    public UserAccount withdrawMoney(double newAmount) {
-        User user = sessionService.sessionUser();
-        UserAccount userAccount = user.getAccount();
-        userAccount.minus(newAmount);
-        userRepository.save(user);
-        return userAccount;
-    }
 
 }

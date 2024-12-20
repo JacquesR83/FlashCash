@@ -12,7 +12,6 @@ public class MvcConfig implements WebMvcConfigurer {
         // "signin" refers to template, only "signin" works, "login" is used for something else
         // never use this URI in controllers, this one bypasses the rest on this specific URI
         registry.addViewController("/signin").setViewName("signin");
-
     }
 
 }

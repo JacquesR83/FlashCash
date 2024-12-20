@@ -1,31 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Account Update</title>
-</head>
-<body>
-<h1>Account Balance</h1>
-<p>New balance: <span th:text="${user.getAccount().getAmount()}"></span></p>
+    <title> Home Page </title>
 
-<h1>Connexions</h1>
-<p>Connexion List: <span th:text="${user.getAccount().getAmount()}"></span></p>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>firstname</th>
-            <th>lastname</th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr th:each="connexionList : ${friend}"> // Field to complete
-                <td style="width: 10%" th:text="${friend.firstname}"></td>
-                <td th:text="${friend.lastname}"></td>
-                <td style="width: 15%" class="text-center">
-                    <a th:href="@{/bidList/update/{id}(id=${bidList.bidListId})}">Send Money</a> |
-<!--                    <a th:href="@{/bidList/delete/{id}(id=${bidList.bidListId})}">Delete</a>-->
-                </td>
-            </tr>
-        <tbody>
-    </table>
+    <link th:href = "@{css/mdb.min.css}" rel="stylesheet"/>
+    <link th:href="@{css/index.css}" rel="stylesheet" />
+
+</head>
+
+<body>
+
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <div class="col-md-3 mb-2 mb-md-0">
+            <a href="/static" class="d-inline-flex link-body-emphasis text-decoration-none">
+                <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+            </a>
+        </div>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="/home" class="nav-link px-2 link-secondary"><H3> Home </H3></a></li>
+            <li><a href="/home" class="nav-link px-2 link-secondary"><H3> FAQ </H3></a></li>
+            <li><a href="/home" class="nav-link px-2 link-secondary"><H3> Contact </H3></a></li>
+        </ul>
+
+        <div class="col-md-3 text-end">
+            <!--            Logged in user: <b th:text="${authentication.principal.DisplayName}"  class="user">  </b>-->
+            <button type="button" class="btn btn-outline-primary me-2" onclick="window.location.href='/signin'" >Login</button>
+            <button href="/account" type="button" class="btn btn-primary" onclick="window.location.href='/account'" >Account Features</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Home</a></li>
+                <li class="nav-item"><a href="/add-to-flashcash" class="nav-link px-2 text-body-secondary">Add Cash</a></li>
+                <li class="nav-item"><a href="/add-link" class="nav-link px-2 text-body-secondary">Add Links</a></li>
+                <li class="nav-item"><a href="/account" class="nav-link px-2 text-body-secondary">Account</a></li>
+                <li class="nav-item"><a href="/curvePoint/list" class="nav-link px-2 text-body-secondary">About</a></li>
+            </ul>
+            <p class="text-center text-body-secondary">© 2024 POSEIDON, Inc</p>
+        </footer>
+    </div>
+</div>
+
 </body>
 </html>

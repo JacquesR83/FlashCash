@@ -4,6 +4,7 @@ import jr.dev.FlashCash.model.User;
 import jr.dev.FlashCash.model.UserAccount;
 import jr.dev.FlashCash.model.dto.SignUpForm;
 import jr.dev.FlashCash.repository.UserRepository;
+import jr.dev.FlashCash.service.form.AddLinkForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ public class UserService {
             user.setEmail(form.getEmail());
             user.setPassword(passwordEncoder.encode(form.getPassword()));
             return userRepository.save(user);
-        }
     }
+
+}
 

@@ -30,7 +30,7 @@ public class SpringSecurityConfig {
                         // username is default field and is changed here (=> checked field in the HTML form login page)
                         .permitAll().usernameParameter("email")
                         // when successful, goes to "/" URL, => always
-                        .defaultSuccessUrl("/", true)
+                        .defaultSuccessUrl("/home", true)
                 )
                 // logout access
                 .logout((logout) -> logout.permitAll());

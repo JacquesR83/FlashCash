@@ -21,22 +21,26 @@
                         <h2 class="card-title text-center mb-5 fw-bold fs-5">Transfer cash to a contact</h2>
 
                         <form th:action="@{/transfer-to-contact}" th:object="${transferForm}" method="POST">
-                            <h4 class="alert-heading">Transfer CASH right now</h4>
+                            <h4 class="alert-heading">Choose receiver</h4>
                             <select th:field="*{contactEmail}">
                                 <option value="default"> Choose a contact</option>
 <!--                                Iteration on linksEmail to eject every email one by one in a selecting list-->
 <!--                                    th:value associates value of the chosen email to the object being sent back-->
 <!--                                th: utext = displaying email in the list-->
-                                <option th:each="email : ${linksEmail}" th:value="${email}" th:utext="${email}"></option>
+                                <option
+                                        th:each="email : ${linksEmail}"
+                                        th:value="${email}"
+                                        th:utext="${email}">
+                                </option>
                             </select>
                             <div data-mdb-input-init class="form-outline mb-4">
                                 <input type="text" th:field="*{amount}"
                                        id="floatingInputAmount"
                                        class="form-outline form-control-color"
-                                       placeholder="Amount"/>
+                                       placeholder="Amount to send"/>
                             </div>
 
-                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Create a new link</button>
+                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Transfer</button>
                             <button href="/home" type="button" onclick="window.location.href='/home'" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-lg btn-block" >Cancel</button>
 
                         </form>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LinkService {
@@ -25,7 +26,7 @@ public class LinkService {
     }
 
     public List<Link> getLinksForUser(User user) {
-        return linkRepository.findByUser1(user);
+        return linkRepository.findLinksByUser1(user);
     }
 
     public void addlink(AddLinkForm form){
@@ -40,10 +41,13 @@ public class LinkService {
     }
 
     public List<String> findLinksEmail() {
-        User connectedUser = sessionService.sessionUser();
-        List<String> contactsEmail = userRepository.findEmailsByUser();
+        // Collects all links with current connected user
+        List<Link> links = linkRepository.findLinksByUser1(sessionService.sessionUser());
 
-        return contactsEmail;
+        // For each link : get user2 email
+        return links.stream()
+                .map(link -> link.getUser2().getEmail())
+                .collect(Collectors.toList());
     }
 }
 

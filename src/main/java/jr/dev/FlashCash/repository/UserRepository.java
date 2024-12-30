@@ -2,15 +2,15 @@ package jr.dev.FlashCash.repository;
 
 import jr.dev.FlashCash.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository <User, Integer> {
 
     // Methode 1 - JPA magic => by the name of our method, SQL request is made by JPA
     Optional<User> findUserByEmail(String s);
-
-     findEmailsByUser();
 
 //    // Methode 2 - HQL => pointe sur l'objet du code, et pas la base directement
 //    // Trouver un utilisateur par email avec une requête JPQL (recherche dans la base de données)

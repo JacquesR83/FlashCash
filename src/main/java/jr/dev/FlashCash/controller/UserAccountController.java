@@ -1,8 +1,6 @@
 package jr.dev.FlashCash.controller;
 
 import jr.dev.FlashCash.model.User;
-import jr.dev.FlashCash.repository.UserAccountRepository;
-import jr.dev.FlashCash.repository.UserRepository;
 import jr.dev.FlashCash.service.SessionService;
 import jr.dev.FlashCash.service.TransferService;
 import jr.dev.FlashCash.service.UserAccountService;
@@ -58,7 +56,7 @@ public class UserAccountController {
     }
 
     @PostMapping("/add-iban")
-    public ModelAndView setIban(Model model, @ModelAttribute("addIbanForm") AddIbanForm form){
+    public ModelAndView saveIban(Model model, @ModelAttribute("addIbanForm") AddIbanForm form){
         logger.info("setting IBAN");
         userAccountService.insertIban(form);
         User user = sessionService.sessionUser();

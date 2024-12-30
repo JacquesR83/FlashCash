@@ -28,4 +28,8 @@ public class UserAccount {
         return this;
     }
 
+    public UserAccount getIban(String iban) {
+        this.iban = iban;
+        return this;
+    }
 }

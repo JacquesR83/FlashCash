@@ -10,6 +10,8 @@ public interface UserRepository extends JpaRepository <User, Integer> {
     // Methode 1 - JPA magic => by the name of our method, SQL request is made by JPA
     Optional<User> findUserByEmail(String s);
 
+     findEmailsByUser();
+
 //    // Methode 2 - HQL => pointe sur l'objet du code, et pas la base directement
 //    // Trouver un utilisateur par email avec une requête JPQL (recherche dans la base de données)
 //    @Query("SELECT u FROM User u WHERE u.email = ?1")

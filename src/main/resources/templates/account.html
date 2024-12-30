@@ -3,21 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Account Update</title>
-    <link rel="stylesheet" href="path/to/bootstrap.css">
+    <link th:href = "@{css/mdb.min.css}" rel="stylesheet"/>
+    <link th:href="@{css/index.css}" rel="stylesheet" />
 </head>
 <body>
-<div class="container">
+<div class="container mt-5">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <div class="col-md-3 mb-2 mb-md-0">
+            <a href="/static" class="d-inline-flex link-body-emphasis text-decoration-none">
+                <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+            </a>
+        </div>
+
+        <H1 class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            ACCOUNT SETTINGS
+        </H1>
+
+        <div class="col-md-3 text-end">
+            <button href="/home" type="button" class="btn btn-primary" onclick="window.location.href='/home'" >Home</button>
+        </div>
+    </header>
+
     <!-- Titre de la page -->
-    <h1>Account Balance</h1>
-    <span th:if="${user.getAccount().getAmount() != null}" th:text="${user.getAccount().getAmount()}">
-        <p>New balance: <span th:text="${user.getAccount().getAmount()}"></span></p></span>
-    <span th:if="${user.getAccount().getAmount() == null}">No connections available.</span>
+    <div class = "p-lg-0">
+        <h2>Balance</h2>
+        <span th:text="${user.getAccount().getAmount()}">
+    <p>New balance: <span th:text="${user.getAccount().getAmount()}"></span></p>
+    </span>
+        <span th:if="${user == null or user.getAccount() == null or user.getAccount().getAmount() == null}">No connections available</span>
+
+    </div>
+    <h2>Related Iban</h2>
+    <span th:text="${user.getAccount().getIban()}"></span>
+    <span th:if="${user.getAccount().getIban() == null}">IBAN is not provided</span>
+
 
     <!-- Section Connexions -->
-    <h2>Connections</h2>
-    <p>Connexion List:
-        <span th:if="${user.getLinks() != null}" th:text="${user.getLinks()}"></span>
-        <span th:if="${user.getLinks() == null}">No connections available.</span>
+    <h2>Connection List</h2>
+    <p>
+        <select th:if="${links != null and links.size() > 0}" name="links">
+            <option value="" disabled selected>Select a friend</option>
+            <!-- For each connexion -->
+            <option th:each="link : ${links}"
+                    th:value="${link.user2.id}"
+                    th:text="${link.user2.firstname} + ' ' + ${link.user2.lastname}"></option>
+        </select>
+
+        <!-- No links available-->
+        <p th:if="${links == null or links.size() == 0}">No connections available</p>
     </p>
 
     <!-- Tableau des connexions -->
@@ -31,14 +64,14 @@
         </thead>
         <tbody>
         <!-- Boucle sur la liste des connexions -->
-        <tr th:each="connectedPerson : ${user.getLinks()}">
-            <td th:text="${connectedPerson.firstname}"></td>
-            <td th:text="${connectedPerson.lastname}"></td>
-            <td class="text-center">
-                <!-- Ajouter ici les actions, par exemple : -->
-                <a th:href="@{/bidList/update/{id}(id=${connectedPerson.id})}">Send Money</a> |
-                <a th:href="@{/bidList/delete/{id}(id=${connectedPerson.id})}">Delete</a>
-            </td>
+        <tr th:each="connectedPerson : ${links}">
+            <td th:text="${connectedPerson.user2.firstname}"></td>
+            <td th:text="${connectedPerson.user2.lastname}"></td>
+<!--            <td class="text-center">-->
+<!--                &lt;!&ndash; Ajouter ici les actions, par exemple : &ndash;&gt;-->
+<!--                <a th:href="@{/bidList/update/{id}(id=${connectedPerson.id})}">Send Money</a> |-->
+<!--                <a th:href="@{/bidList/delete/{id}(id=${connectedPerson.id})}">Delete</a>-->
+<!--            </td>-->
         </tr>
         </tbody>
     </table>

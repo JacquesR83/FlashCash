@@ -14,8 +14,7 @@ public class User  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-//    @Column(unique = true, nullable = false)
-//    @Email(message = "Email should be valid")
+    @Column(unique = true, nullable = false)
     private String email; //login
 
     private String firstname;

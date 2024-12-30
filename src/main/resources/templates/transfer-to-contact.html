@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add To FlashCash Form</title>
+    <title>Add a Link Form</title>
     <link th:href = "@{css/mdb.min.css}" rel="stylesheet"/>
     <link th:href="@{css/index.css}" rel="stylesheet" />
 </head>
@@ -18,18 +18,25 @@
                         <div class="logo-card">
                             <img class="w-25 pb-3" th:src="@{/css/images/logo.png}" alt="Logo" />
                         </div>
-                        <h2 class="card-title text-center mb-5 fw-bold fs-5">Deposit your Cash </h2>
+                        <h2 class="card-title text-center mb-5 fw-bold fs-5">Transfer cash to a contact</h2>
 
-                        <form th:action="@{/add-to-flashcash}" th:object="${addToFlashCashForm}" method="POST">
-
+                        <form th:action="@{/transfer-to-contact}" th:object="${transferForm}" method="POST">
+                            <h4 class="alert-heading">Transfer CASH right now</h4>
+                            <select th:field="*{contactEmail}">
+                                <option value="default"> Choose a contact</option>
+<!--                                Iteration on linksEmail to eject every email one by one in a selecting list-->
+<!--                                    th:value associates value of the chosen email to the object being sent back-->
+<!--                                th: utext = displaying email in the list-->
+                                <option th:each="email : ${linksEmail}" th:value="${email}" th:utext="${email}"></option>
+                            </select>
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="number" th:field="*{amount}"
+                                <input type="text" th:field="*{amount}"
                                        id="floatingInputAmount"
                                        class="form-outline form-control-color"
                                        placeholder="Amount"/>
                             </div>
 
-                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Deposit your cash</button>
+                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Create a new link</button>
                             <button href="/home" type="button" onclick="window.location.href='/home'" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-lg btn-block" >Cancel</button>
 
                         </form>

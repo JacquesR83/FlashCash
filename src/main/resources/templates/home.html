@@ -23,22 +23,26 @@
             <li><a href="/home" class="nav-link px-2 link-secondary"><H3> FAQ </H3></a></li>
             <li><a href="/home" class="nav-link px-2 link-secondary"><H3> Contact </H3></a></li>
         </ul>
-
-        <div class="col-md-3 text-end">
-            <!--            Logged in user: <b th:text="${authentication.principal.DisplayName}"  class="user">  </b>-->
-            <button type="button" class="btn btn-outline-primary me-2" onclick="window.location.href='/signin'" >Login</button>
-            <button href="/account" type="button" class="btn btn-primary" onclick="window.location.href='/account'" >Account Features</button>
+        <div class="col-md-3 text-end d-flex align-items-center justify-content-between">
+            <div>
+                Logged in user: <b th:text="${user.firstname + ' ' + user.lastname}"  class="user">  </b>
+            </div>
+            <div class="col-md-3 text-end d-flex align-items-center justify-content-between">
+                <button type="button" class="btn btn-outline-primary me-2" onclick="window.location.href='/signin'" >Login</button>
+                <button href="/account" type="button" class="btn btn-primary" onclick="window.location.href='/account'" >Account Features</button>
+            </div>
         </div>
     </header>
 
     <div class="container">
         <footer class="py-3 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Home</a></li>
                 <li class="nav-item"><a href="/add-to-flashcash" class="nav-link px-2 text-body-secondary">Add Cash</a></li>
                 <li class="nav-item"><a href="/add-link" class="nav-link px-2 text-body-secondary">Add Links</a></li>
                 <li class="nav-item"><a href="/account" class="nav-link px-2 text-body-secondary">Account</a></li>
                 <li class="nav-item"><a href="/add-iban" class="nav-link px-2 text-body-secondary">Add an Iban</a></li>
+                <li class="nav-item"><a href="/transfer-to-contact" class="nav-link px-2 text-body-secondary">Transfer cash to a contact</a></li>
+                <li class="nav-item"><a href="/transfers" class="nav-link px-2 text-body-secondary">Transfer history</a></li>
             </ul>
             <p class="text-center text-body-secondary">© 2024 FLASHCASH, Inc</p>
         </footer>

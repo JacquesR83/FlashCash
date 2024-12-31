@@ -41,25 +41,24 @@
     <!-- Section Connexions -->
     <h2>Connection List</h2>
     <p>
-        <select th:if="${links != null and links.size() > 0}" name="links">
-            <option value="" disabled selected>Select a friend</option>
-            <!-- For each connexion -->
-            <option th:each="link : ${links}"
-                    th:value="${link.user2.id}"
-                    th:text="${link.user2.firstname} + ' ' + ${link.user2.lastname}"></option>
-        </select>
+<!--        <select th:if="${links != null and links.size() > 0}" name="links">-->
+<!--            <option value="" disabled selected>Select a friend</option>-->
+<!--            &lt;!&ndash; For each connexion &ndash;&gt;-->
+<!--            <option th:each="link : ${links}"-->
+<!--                    th:value="${link.user2.id}"-->
+<!--                    th:text="${link.user2.firstname} + ' ' + ${link.user2.lastname}"></option>-->
+<!--        </select>-->
 
         <!-- No links available-->
         <p th:if="${links == null or links.size() == 0}">No connections available</p>
     </p>
 
     <!-- Tableau des connexions -->
-    <table class="table table-bordered">
+    <table class="table table-bordered flex-xxl-row">
         <thead>
         <tr>
             <th>Firstname</th>
             <th>Lastname</th>
-            <th>Actions</th>
         </tr>
         </thead>
         <tbody>

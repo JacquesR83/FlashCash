@@ -2,9 +2,7 @@ package jr.dev.FlashCash.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
 
-import java.util.Collection;
 import java.util.List;
 
 @Data
@@ -15,13 +13,13 @@ public class User  {
     private Integer id;
 
     @Column(unique = true, nullable = false)
-    private String email; //login
+    private java.lang.String email; //login
 
-    private String firstname;
-    private String lastname;
+    private java.lang.String firstname;
+    private java.lang.String lastname;
 
 //    @NotNull(message= "Password needed")
-    private String password;
+    private java.lang.String password;
 
     @ManyToMany
     private List<Link> links;

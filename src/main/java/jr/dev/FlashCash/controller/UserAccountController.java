@@ -6,6 +6,7 @@ import jr.dev.FlashCash.service.TransferService;
 import jr.dev.FlashCash.service.UserAccountService;
 import jr.dev.FlashCash.service.form.AddIbanForm;
 import jr.dev.FlashCash.service.form.AddToFlashCashForm;
+import jr.dev.FlashCash.service.form.CashToBankForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class UserAccountController {
             transferService.transferCashToAccount(form);
             User user = sessionService.sessionUser();
             model.addAttribute("user", user);
-            return new ModelAndView ("home");
+            return new ModelAndView ("account");
     }
 
     @GetMapping("/add-iban")
@@ -61,7 +62,30 @@ public class UserAccountController {
         userAccountService.insertIban(form);
         User user = sessionService.sessionUser();
         model.addAttribute("user", user);
-        return new ModelAndView("/account");
+        return new ModelAndView("account");
+    }
+
+    @GetMapping ("/cash-to-bank")
+    public ModelAndView showWithdrawCashForm(Model model){
+        logger.info("Withdraw display form");
+        String linkedIban = transferService.findIban();
+        model.addAttribute("linkedIban", linkedIban);
+        return new ModelAndView("cash-to-bank", "cashToBankForm", new CashToBankForm());
+    }
+
+    @PostMapping("/cash-to-bank")
+    public ModelAndView sendCashToBankAccount(Model model, @ModelAttribute("cashToBankForm") CashToBankForm form) {
+        logger.info("Sending cash out");
+
+
+        String linkedIban = transferService.findIban();
+        model.addAttribute("linkedIban", linkedIban);
+
+        User user = sessionService.sessionUser();
+        model.addAttribute("user", user);
+        transferService.transferCashToBank(form);
+
+        return new ModelAndView ("account");
     }
 
 //    @PostMapping ("/takecash")

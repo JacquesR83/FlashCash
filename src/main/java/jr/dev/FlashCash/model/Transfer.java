@@ -2,6 +2,8 @@ package jr.dev.FlashCash.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.lang.String;
 import java.time.LocalDateTime;
 
 @Data

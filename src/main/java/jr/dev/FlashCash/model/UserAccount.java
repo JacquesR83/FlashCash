@@ -28,7 +28,7 @@ public class UserAccount {
         return this;
     }
 
-    public UserAccount getIban(String iban) {
+    public UserAccount getIban(java.lang.String iban) {
         this.iban = iban;
         return this;
     }

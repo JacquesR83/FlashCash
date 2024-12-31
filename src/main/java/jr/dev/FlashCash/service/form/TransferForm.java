@@ -1,5 +1,6 @@
 package jr.dev.FlashCash.service.form;
 
+import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data
@@ -10,19 +11,4 @@ public class TransferForm {
 
     private String description;
 
-//    public String getContactEmail() {
-//        return contactEmail;
-//    }
-//
-//    public void setContactEmail(String contactEmail) {
-//        this.contactEmail = contactEmail;
-//    }
-//
-//    public Double getAmount() {
-//        return amount;
-//    }
-//
-//    public void setAmount(Double amount) {
-//        this.amount = amount;
-//    }
 }

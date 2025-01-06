@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:background-color="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Account Update</title>
@@ -8,72 +8,93 @@
 </head>
 <body>
 <div class="container mt-5">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-        <div class="col-md-3 mb-2 mb-md-0">
-            <a href="/static" class="d-inline-flex link-body-emphasis text-decoration-none">
-                <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-            </a>
-        </div>
-
-        <H1 class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            ACCOUNT SETTINGS
-        </H1>
-
-        <div class="col-md-3 text-end">
-            <button href="/home" type="button" class="btn btn-primary" onclick="window.location.href='/home'" >Home</button>
-        </div>
+    <header class="d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom">
+        <h1 class="fw-bold">ACCOUNT SETTINGS</h1>
+        <button type="button" class="btn btn-primary btn-lg shadow-2" onclick="window.location.href='/home'">Home</button>
     </header>
 
-    <!-- Titre de la page -->
-    <div class = "p-lg-0">
-        <h2>Balance</h2>
-        <span th:text="${user.getAccount().getAmount()}">
-    <p>New balance: <span th:text="${user.getAccount().getAmount()}"></span></p>
-    </span>
-        <span th:if="${user == null or user.getAccount() == null or user.getAccount().getAmount() == null}">No connections available</span>
+    <div class="row g-4" style="background-color: #508bfc;">
+        <!-- Balance Card -->
+        <div class="col-md-6">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="card-body p-4">
+                    <h4 class="fw-bold mb-4">Balance</h4>
+                    <span class="h3" th:text="${user.getAccount().getAmount()}"></span>
+                </div>
+            </div>
+        </div>
 
+        <!-- IBAN Card -->
+        <div class="col-md-6">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="card-body p-4">
+                    <h4 class="fw-bold mb-4">Related Iban</h4>
+                    <span class="h5" th:text="${user.getAccount().getIban()}"></span>
+                    <span class="text-muted" th:if="${user.getAccount().getIban() == null}">IBAN is not provided</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Connection List -->
+        <div class="col-12">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="card-body p-4">
+                    <h4 class="fw-bold mb-4">Connection List</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="table-light">
+                            <tr>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="connectedPerson : ${links}">
+                                <td th:text="${connectedPerson.user2.firstname}"></td>
+                                <td th:text="${connectedPerson.user2.lastname}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-muted" th:if="${links == null or links.size() == 0}">No connections available</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transfer List -->
+        <div class="col-12">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="card-body p-4">
+                    <h4 class="fw-bold mb-4">Transfer List</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="table-light">
+                            <tr>
+                                <th>Id</th>
+                                <th>Amount Before Fee</th>
+                                <th>Amount After Fee</th>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Receiver</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="transfer : ${transfers}">
+                                <td th:text="${transfer.id}"></td>
+                                <td th:text="${transfer.amountBeforeFee}"></td>
+                                <td th:text="${transfer.amountAfterFee}"></td>
+                                <td th:text="${#temporals.format(transfer.dateTime, 'dd-MM-yyyy HH:mm')}"></td>
+                                <td th:text="${transfer.description}"></td>
+                                <td th:text="${transfer.to.getFirstname() + ' ' + transfer.to.getLastname()}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-muted" th:if="${transfers == null or transfers.size() == 0}">No transfer available</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <h2>Related Iban</h2>
-    <span th:text="${user.getAccount().getIban()}"></span>
-    <span th:if="${user.getAccount().getIban() == null}">IBAN is not provided</span>
-
-
-    <!-- Section Connexions -->
-    <h2>Connection List</h2>
-    <p>
-<!--        <select th:if="${links != null and links.size() > 0}" name="links">-->
-<!--            <option value="" disabled selected>Select a friend</option>-->
-<!--            &lt;!&ndash; For each connexion &ndash;&gt;-->
-<!--            <option th:each="link : ${links}"-->
-<!--                    th:value="${link.user2.id}"-->
-<!--                    th:text="${link.user2.firstname} + ' ' + ${link.user2.lastname}"></option>-->
-<!--        </select>-->
-
-        <!-- No links available-->
-        <p th:if="${links == null or links.size() == 0}">No connections available</p>
-    </p>
-
-    <!-- Tableau des connexions -->
-    <table class="table table-bordered flex-xxl-row">
-        <thead>
-        <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Boucle sur la liste des connexions -->
-        <tr th:each="connectedPerson : ${links}">
-            <td th:text="${connectedPerson.user2.firstname}"></td>
-            <td th:text="${connectedPerson.user2.lastname}"></td>
-<!--            <td class="text-center">-->
-<!--                &lt;!&ndash; Ajouter ici les actions, par exemple : &ndash;&gt;-->
-<!--                <a th:href="@{/bidList/update/{id}(id=${connectedPerson.id})}">Send Money</a> |-->
-<!--                <a th:href="@{/bidList/delete/{id}(id=${connectedPerson.id})}">Delete</a>-->
-<!--            </td>-->
-        </tr>
-        </tbody>
-    </table>
 </div>
 </body>
 </html>

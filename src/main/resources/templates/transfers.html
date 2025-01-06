@@ -2,66 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Account Update</title>
-    <link th:href = "@{css/mdb.min.css}" rel="stylesheet"/>
-    <link th:href="@{css/index.css}" rel="stylesheet" />
+    <title>Transfers</title>
+    <link th:href="@{css/mdb.min.css}" rel="stylesheet"/>
+    <link th:href="@{css/index.css}" rel="stylesheet"/>
 </head>
 <body>
 <div class="container mt-5">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-        <div class="col-md-3 mb-2 mb-md-0">
-            <a href="/static" class="d-inline-flex link-body-emphasis text-decoration-none">
-                <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-            </a>
-        </div>
-
-        <H1 class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            TRANSFERS
-        </H1>
-
-        <div class="col-md-3 text-end">
-            <button href="/home" type="button" class="btn btn-primary" onclick="window.location.href='/home'" >Home</button>
-        </div>
+    <header class="d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 ">
+        <h1 class="fw-bold">TRANSFERS</h1>
+        <button type="button" class="btn btn-primary btn-lg shadow-2" onclick="window.location.href='/home'">Home</button>
     </header>
 
-    <!-- Section Connexions -->
-    <h2>Transfer List</h2>
-
-        <!-- No links available-->
-    <p th:if="${transfers == null or transfers.size() == 0}">No transfer available</p>
-    </p>
-
-    <!-- Tableau des connexions -->
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Amount Before Fee</th>
-            <th>Amount After Fee</th>
-            <th>Date</th>
-            <th>Description</th>
-<!--            <th>Sender</th>-->
-            <th>Receiver</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Boucle sur la liste des connexions -->
-        <tr th:each="transfer : ${transfers}">
-            <td th:text="${transfer.id}"></td>
-            <td th:text="${transfer.amountBeforeFee}"></td>
-            <td th:text="${transfer.amountAfterFee}"></td>
-            <td th:text="${#temporals.format(transfer.dateTime, 'dd-MM-yyyy HH:mm')}"></td>
-            <td th:text="${transfer.description}"></td>
-<!--            <td th:text="${transfer.from.getEmail()}"></td>-->
-            <td th:text="${transfer.to.getFirstname() + ' ' + transfer.to.getLastname()}"></td>
-            <!--            <td class="text-center">-->
-            <!--                &lt;!&ndash; Ajouter ici les actions, par exemple : &ndash;&gt;-->
-            <!--                <a th:href="@{/bidList/update/{id}(id=${connectedPerson.id})}">Send Money</a> |-->
-            <!--                <a th:href="@{/bidList/delete/{id}(id=${connectedPerson.id})}">Delete</a>-->
-            <!--            </td>-->
-        </tr>
-        </tbody>
-    </table>
+    <div class="vh-100" style="background-color: #508bfc;">
+        <div class="container py-5">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="card-body p-4">
+                    <div class="table-responsive">
+                        <p class="text-muted text-center" th:if="${transfers == null or transfers.size() == 0}">No transfer available</p>
+                        <table class="table align-middle mb-0">
+                            <thead class="bg-light">
+                            <tr>
+                                <th>Id</th>
+                                <th>Amount Before Fee</th>
+                                <th>Amount After Fee</th>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Receiver</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="transfer : ${transfers}">
+                                <td th:text="${transfer.id}"></td>
+                                <td th:text="${transfer.amountBeforeFee}"></td>
+                                <td th:text="${transfer.amountAfterFee}"></td>
+                                <td th:text="${#temporals.format(transfer.dateTime, 'dd-MM-yyyy HH:mm')}"></td>
+                                <td th:text="${transfer.description}"></td>
+                                <td th:text="${transfer.to.getFirstname() + ' ' + transfer.to.getLastname()}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

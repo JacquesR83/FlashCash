@@ -38,7 +38,7 @@ public class TransferService {
         }
     }
 
-    public void transfer(TransferForm form) {
+    public String transfer(TransferForm form) { // TO COMPLETE WITH ERROR MESSAGE ON CONSTRAINT
 
         if(form!= null){
             User to = userRepository.findUserByEmail(form.getContactEmail())
@@ -53,12 +53,20 @@ public class TransferService {
         currentTransfer.setAmountBeforeFee(form.getAmount());
         currentTransfer.setAmountAfterFee(applyFee(form.getAmount()));
 
-        // Update Sender & Receiver accounts amounts and save in repo
-        userAccountRepository.save(sessionService.sessionUser().getAccount().minus(currentTransfer.getAmountAfterFee())); // Get the transfer amount >> form amount
-        userAccountRepository.save(to.getAccount().plus(currentTransfer.getAmountAfterFee()));
-        transferRepository.save(currentTransfer);
-
+            if(sessionService.sessionUser().getAccount().getAmount() - form.getAmount() > 0){
+                // Update Sender & Receiver accounts amounts and save in repo
+                userAccountRepository.save(sessionService.sessionUser().getAccount().minus(currentTransfer.getAmountAfterFee())); // Get the transfer amount >> form amount
+                userAccountRepository.save(to.getAccount().plus(currentTransfer.getAmountAfterFee()));
+                transferRepository.save(currentTransfer);
+                // Retour succès
+                return "Transfer successful!";
+            }
+            else {
+                // Retour échec si le solde est insuffisant
+                return "You need more money";
+            }
         }
+        return "Invalid transfer form";
     }
 
     public List<Transfer> findTransactions() {

@@ -1,54 +1,98 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title> Home Page </title>
-
-    <link th:href = "@{css/mdb.min.css}" rel="stylesheet"/>
-    <link th:href="@{css/index.css}" rel="stylesheet" />
-
+    <title>Home Page</title>
+    <link th:href="@{css/mdb.min.css}" rel="stylesheet"/>
+    <link th:href="@{css/index.css}" rel="stylesheet"/>
 </head>
-
 <body>
-
 <div class="container">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-        <div class="col-md-3 mb-2 mb-md-0">
-            <a href="/static" class="d-inline-flex link-body-emphasis text-decoration-none">
-                <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+    <header class="container-fluid border-bottom py-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <button type="button" class="btn btn-outline-primary btn-lg px-5 shadow-2" onclick="window.location.href='/signin'">Login</button>
+            <div>
+                Logged in user: <b th:text="${user.firstname + ' ' + user.lastname}" class="user fw-bold"></b>
+            </div>
+        </div>
+
+        <div class="text-center my-4">
+            <a href="/home" class="nav-link">
+                <h3 class="display-4 fw-bold">FLASH CASH</h3>
             </a>
         </div>
 
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="/home" class="nav-link px-2 link-secondary"><H3> Home </H3></a></li>
-            <li><a href="/home" class="nav-link px-2 link-secondary"><H3> FAQ </H3></a></li>
-            <li><a href="/home" class="nav-link px-2 link-secondary"><H3> Contact </H3></a></li>
-        </ul>
-        <div class="col-md-3 text-end d-flex align-items-center justify-content-between">
-            <div>
-                Logged in user: <b th:text="${user.firstname + ' ' + user.lastname}"  class="user">  </b>
-            </div>
-            <div class="col-md-3 text-end d-flex align-items-center justify-content-between">
-                <button type="button" class="btn btn-outline-primary me-2" onclick="window.location.href='/signin'" >Login</button>
-                <button href="/account" type="button" class="btn btn-primary" onclick="window.location.href='/account'" >Account Features</button>
-            </div>
+        <div class="text-end">
+            <button type="button" class="btn btn-primary btn-lg shadow-2" onclick="window.location.href='/account'">Account Features</button>
         </div>
+
     </header>
 
-    <div class="container">
-        <footer class="py-3 my-4">
-            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item"><a href="/add-to-flashcash" class="nav-link px-2 text-body-secondary">Add Cash</a></li>
-                <li class="nav-item"><a href="/add-link" class="nav-link px-2 text-body-secondary">Add Links</a></li>
-                <li class="nav-item"><a href="/account" class="nav-link px-2 text-body-secondary">Account</a></li>
-                <li class="nav-item"><a href="/add-iban" class="nav-link px-2 text-body-secondary">Add an Iban</a></li>
-                <li class="nav-item"><a href="/cash-to-bank" class="nav-link px-2 text-body-secondary">Send cash to your bank</a></li>
-                <li class="nav-item"><a href="/transfer-to-contact" class="nav-link px-2 text-body-secondary">Transfer cash to a contact</a></li>
-                <li class="nav-item"><a href="/transfers" class="nav-link px-2 text-body-secondary">Transfer history</a></li>
-            </ul>
-            <p class="text-center text-body-secondary">© 2024 FLASHCASH, Inc</p>
-        </footer>
-    </div>
-</div>
+    <div class="vh-150" style="background-color: #508bfc;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <!-- Welcome and Balance Cards -->
+                <div class="col-12 col-lg-6 mb-5">
+                    <!-- Welcome Card -->
+                    <div class="card shadow-2-strong mb-4" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+                            <h4 class="mb-4 fw-bold border-bottom-0">WELCOME TO FLASHCASH</h4>
+                            <span class="h3" th:text="${user.getFirstname()}">  </span>
+                            <span class="h3" th:text="${user.getLastname()}">  </span>
+<!--                            <div class="d-flex flex-column gap-2">-->
+<!--                                <a href="/transfers" class="btn btn-primary shadow-1">Transfer history</a>-->
+<!--                            </div>-->
+                            <div class="card-body p-5 text-center">
+                                <h4 class="mb-4 fw-bold">Actual Balance</h4>
+                                <span class="h3" th:text="${user.getAccount().getAmount()}">  </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Cash Transfers and Account Options Row -->
+                <div class="row justify-content-center mb-5">
+                    <div class="col-12 col-lg-6 mb-4">
+                        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                            <div class="card-body p-5 text-center">
+                                <h4 class="mb-4 fw-bold">CASH TRANSFERS</h4>
+                                <div class="d-flex flex-column gap-3">
+                                    <a href="/add-to-flashcash" class="btn btn-primary shadow-1">Add Cash</a>
+                                    <a href="/cash-to-bank" class="btn btn-primary shadow-1">Send cash to your bank</a>
+                                    <a href="/transfer-to-contact" class="btn btn-primary shadow-1">Transfer cash to a contact</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                            <div class="card-body p-5 text-center">
+                                <h4 class="mb-4 fw-bold">ACCOUNT OPTIONS</h4>
+                                <div class="d-flex flex-column gap-3">
+                                    <a href="/add-link" class="btn btn-primary shadow-1">Add a Contact</a>
+                                    <a href="/add-iban" class="btn btn-primary shadow-1">Add an Iban</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 mb-5">
+                    <!-- Consult transfers-->
+                    <div class="card shadow-2-strong mb-4" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+                            <h4 class="mb-4 fw-bold">Consult transfers</h4>
+                            <div class="text-center d-flex flex-column gap-3">
+                                <button type="button" class="btn btn-primary shadow-1" onclick="window.location.href='/transfers'">Transfers</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-3 my-4">
+        <p class="text-center text-body-secondary">© 2024 FLASHCASH, Inc</p>
+    </footer>
+</div>
 </body>
 </html>

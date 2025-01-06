@@ -2,8 +2,6 @@ package jr.dev.FlashCash.controller;
 
 import jakarta.validation.Valid;
 import jr.dev.FlashCash.model.Transfer;
-import jr.dev.FlashCash.model.User;
-import jr.dev.FlashCash.repository.TransferRepository;
 import jr.dev.FlashCash.repository.UserRepository;
 import jr.dev.FlashCash.service.LinkService;
 import jr.dev.FlashCash.service.SessionService;
@@ -15,11 +13,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @Controller
+@RequestMapping
 public class TransferController {
 
     private final LinkService linkService;
@@ -53,10 +53,11 @@ public class TransferController {
             return new ModelAndView("transfer-to-contact");
         }
 
-        transferService.transfer(form);
-        List<Transfer> transfers = transferService.findTransactions();
-        model.addAttribute("transfers", transfers);
-        return new ModelAndView("transfers");
+            transferService.transfer(form);
+            List<Transfer> transfers = transferService.findTransactions();
+            model.addAttribute("transfers", transfers);
+            return new ModelAndView("transfers");
+
     }
 
 
@@ -66,4 +67,5 @@ public class TransferController {
         model.addAttribute("transfers", transfers);
         return new ModelAndView("transfers");
     }
+
 }

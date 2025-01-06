@@ -25,8 +25,15 @@ public class LinkService {
         this.linkRepository = linkRepository;
     }
 
+//    public List<Link> getLinksForUser(User user) {
+//        return linkRepository.findLinksByUser1(user);
+//    }
+//    public List<Link> getLinksForUser(User user) {
+//        return linkRepository.findLinksByUser1StoredProcedure(user);
+//    }
+
     public List<Link> getLinksForUser(User user) {
-        return linkRepository.findLinksByUser1(user);
+        return linkRepository.findLinksByUser1StoredProcedure(user.getId());
     }
 
     public void addlink(AddLinkForm form){
@@ -42,12 +49,23 @@ public class LinkService {
 
     public List<String> findLinksEmail() {
         // Collects all links with current connected user
-        List<Link> links = linkRepository.findLinksByUser1(sessionService.sessionUser());
+//        List<Link> links = linkRepository.findLinksByUser1(sessionService.sessionUser());
+        List<Link> links = linkRepository.findLinksByUser1StoredProcedure(sessionService.sessionUser().getId());
 
         // For each link : get user2 email
         return links.stream()
                 .map(link -> link.getUser2().getEmail())
                 .collect(Collectors.toList());
     }
+
+
+//    // Alternative find links emails
+//    public List<String> findLinksEmail() {
+//        // Collects all links with current connected user
+////        List<Link> links = linkRepository.findLinksByUser1(sessionService.sessionUser());
+//        List<String> emails = userRepository.findLinks(sessionService.sessionUser().getId());
+//        return emails;
+//    }
+
 }
 

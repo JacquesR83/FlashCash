@@ -88,12 +88,6 @@ public class UserAccountController {
         return new ModelAndView ("account");
     }
 
-//    @PostMapping ("/takecash")
-//    public String cutAmount(@RequestParam double amount, Model model ){
-//        UserAccount updatedAccount = userAccountService.withdrawMoney(amount);
-//        model.addAttribute("account", updatedAccount);
-//        return "home";
-//    }
 
 
 }

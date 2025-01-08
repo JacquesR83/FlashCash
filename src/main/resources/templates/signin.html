@@ -30,7 +30,7 @@
               <p th:text="${authError}"></p>
             </div>
 
-            <form th:action="@{/authentication}" method="post" th:object="${signInForm}">
+            <form th:action="@{/signin}" method="post" th:object="${signInForm}">
               <div data-mdb-input-init class="form-outline mb-4">
                 <input
                         type="email"

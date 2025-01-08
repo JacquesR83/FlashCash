@@ -28,6 +28,7 @@ public class HomeController {
 
     @GetMapping("/home")
     public String home(Model model) {
+
         User user = sessionService.sessionUser();
         model.addAttribute("user", user);
         return "home";
@@ -35,6 +36,7 @@ public class HomeController {
 
     @GetMapping("/account")
     public String getAccount(Model model) {
+
         User user = sessionService.sessionUser();
         List<Link> links = linkService.getLinksForUser(user);
         List <Transfer> transfers = transferService.findTransactions();

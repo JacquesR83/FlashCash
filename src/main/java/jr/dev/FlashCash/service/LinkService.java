@@ -2,8 +2,8 @@ package jr.dev.FlashCash.service;
 
 import jr.dev.FlashCash.model.Link;
 import jr.dev.FlashCash.model.User;
-import jr.dev.FlashCash.repository.LinkRepository;
-import jr.dev.FlashCash.repository.UserRepository;
+import jr.dev.FlashCash.interfaces.repository.LinkRepository;
+import jr.dev.FlashCash.interfaces.repository.UserRepository;
 import jr.dev.FlashCash.service.form.AddLinkForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

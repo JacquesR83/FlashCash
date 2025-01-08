@@ -1,7 +1,7 @@
 package jr.dev.FlashCash.service;
 
 import jr.dev.FlashCash.model.User;
-import jr.dev.FlashCash.repository.UserRepository;
+import jr.dev.FlashCash.interfaces.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

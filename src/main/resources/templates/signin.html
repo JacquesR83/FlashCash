@@ -16,19 +16,53 @@
           <div class="card-body p-5 text-center">
 
               <div class="logo-card">
-                  <img class="w-25 pb-3" th:src="@{/css/images/logo.png}" alt="Logo" />
+                  <img class="w-100 pb-3" th:src="@{/css/images/logo.png}" alt="Logo" />
               </div>
               <h2 class="card-title text-center mb-5 fw-bold fs-5">Sign in</h2>
 
-            <form th:action="@{/signin}" method="post">
+            <!--            Redirection the error message "email already exists" since signup page (check UserController Redirect Attributes) -->
+            <div th:if="${emailError}" class="text-danger text-start" role="alert">
+              <p th:text="${emailError}"></p>
+            </div>
 
+            <!--            Redirection the error message "authentication failed" -->
+            <div th:if="${authError}" class="text-danger text-start" role="alert">
+              <p th:text="${authError}"></p>
+            </div>
+
+            <form th:action="@{/authentication}" method="post" th:object="${signInForm}">
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="email" name ="email" class="form-outline form-control-color" placeholder="E-mail" required autofocus />
+                <input
+                        type="email"
+                        id="email"
+                        th:field="*{email}"
+                        class="form-outline form-control-color"
+                        placeholder="E-mail address"
+                >
+<!--                required-->
+
+                <div class="invalid-feedback text-start">
+                  Please enter your email
+                </div>
+                <span th:errors="*{email}" th:if="${#fields.hasErrors('email')}" class="text-danger text-start"></span>
               </div>
 
+
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="password" name="password" class="form-outline form-control-color" placeholder="Password" />
+                <input type="password"
+                       id="password"
+                       th:field="*{password}"
+                       name="password"
+                       class="form-outline form-control-color"
+                       placeholder="Password"/>
               </div>
+              <div class="invalid-feedback text-start">
+                Please enter a password
+              </div>
+              <span th:errors="*{password}" th:if="${#fields.hasErrors('password')}" class="text-danger text-end"></span>
+
+
+
 
               <div class="form-check d-flex justify-content-start mb-4">
                 <input class="form-check-input" type="checkbox" value="" id="form1Example3" />

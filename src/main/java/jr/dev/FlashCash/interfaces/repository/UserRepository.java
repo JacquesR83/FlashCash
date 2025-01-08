@@ -1,16 +1,29 @@
-package jr.dev.FlashCash.repository;
+package jr.dev.FlashCash.interfaces.repository;
 
 import jr.dev.FlashCash.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository <User, Integer> {
+public interface UserRepository extends JpaRepository <User, Integer>,JpaSpecificationExecutor<User>{
 
     // Methode 1 - JPA magic => by the name of our method, SQL request is made by JPA
     Optional<User> findUserByEmail(String s);
+
+    boolean existsByEmail(String email);
+
+    // JPA can't execute 2 requests at the same time for a stocked procedure
+    // 1) Executes Stocked Procedure passing email and saving password in "@userPassword" variable in DB
+    @Query(value = "CALL PS_Password(:email, @userPassword);", nativeQuery = true)
+    void callPasswordProcedure(@Param("email") String email);
+
+    //2) Get password already stocked in the defined stocked procedure variable "@userPassword" (this one stays as long as user is connected)
+    @Query(value = "SELECT @userPassword", nativeQuery = true)
+    String getPasswordFromStoredProcedure();
+
 
 //    @Query(value= "CALL PS_Links(:userId)", nativeQuery = true)
 //    List<String> findLinks(Integer id);

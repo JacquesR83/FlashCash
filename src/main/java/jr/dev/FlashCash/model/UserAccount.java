@@ -14,7 +14,7 @@ public class UserAccount {
 
     private Double amount;
 
-//    @Column (unique = true, nullable = false)
+//    @Column (unique = true)
     private String iban;
 
 

@@ -2,9 +2,9 @@ package jr.dev.FlashCash.service;
 
 import jr.dev.FlashCash.model.Transfer;
 import jr.dev.FlashCash.model.User;
-import jr.dev.FlashCash.repository.TransferRepository;
-import jr.dev.FlashCash.repository.UserAccountRepository;
-import jr.dev.FlashCash.repository.UserRepository;
+import jr.dev.FlashCash.interfaces.repository.TransferRepository;
+import jr.dev.FlashCash.interfaces.repository.UserAccountRepository;
+import jr.dev.FlashCash.interfaces.repository.UserRepository;
 import jr.dev.FlashCash.service.form.AddToFlashCashForm;
 import jr.dev.FlashCash.service.form.CashToBankForm;
 import jr.dev.FlashCash.service.form.TransferForm;

@@ -24,9 +24,13 @@
 
                             <div data-mdb-input-init class="form-outline mb-4">
                                 <input type="text" th:field="*{iban}"
-                                       id="floatingInputAmount"
+                                       id="iban"
                                        class="form-outline form-control-color"
                                        placeholder="Insert your IBAN"/>
+                                <div th:if="${#fields.hasErrors('iban')}" th:errors="*{iban}" class="text-danger text-start"></div>
+                            </div>
+                            <div class="invalid-feedback text-start">
+                                Provided IBAN is not valid
                             </div>
 
                             <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Add IBAN</button>

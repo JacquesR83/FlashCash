@@ -1,4 +1,4 @@
-package jr.dev.FlashCash.repository;
+package jr.dev.FlashCash.interfaces.repository;
 
 import jr.dev.FlashCash.model.UserAccount;
 import org.springframework.data.jpa.repository.Query;

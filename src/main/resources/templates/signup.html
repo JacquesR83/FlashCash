@@ -9,7 +9,6 @@
   <!-- CSS Dependencies -->
   <link th:href="@{css/mdb.min.css}" rel="stylesheet">
   <link th:href="@{css/index.css}" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body class="signin-form">
@@ -21,13 +20,13 @@
           <div class="card-body p-5 text-center">
             <!-- Logo -->
             <div class="logo-card">
-              <img class="w-25 pb-3" th:src="@{/css/images/logo.png}" alt="Flash Cash Logo">
+              <img class="w-100 pb-3" th:src="@{/css/images/logo.png}" alt="Flash Cash Logo">
             </div>
 
             <h1 class="card-title h4 mb-5 fw-bold">Sign up for Flash Cash</h1>
 
             <!-- Sign-up Form -->
-            <form th:action="@{/signup}" method="post" th:object="${user}" class="needs-validation" novalidate>
+            <form th:action="@{/signup}" method="post" th:object="${signUpForm}" class="needs-validation" novalidate>
               <div data-mdb-input-init class="form-outline mb-4">
                 <input
                         type="text"
@@ -35,8 +34,9 @@
                         th:field="*{firstname}"
                         class="form-outline form-control-color"
                         placeholder="First name"
-                        required
+
                         autofocus>
+<!--                required-->
                 <div class="invalid-feedback text-start">
                   Please enter your first name
                 </div>
@@ -50,7 +50,8 @@
                         th:field="*{lastname}"
                         class="form-outline form-control-color"
                         placeholder="Last name"
-                        required>
+                        >
+<!--                required-->
                 <div class="invalid-feedback text-start">
                   Please enter your last name
                 </div>
@@ -59,13 +60,16 @@
 
               <div data-mdb-input-init class="form-outline mb-4">
                 <input
-                        type="email"
-                        id="email"
-                        th:field="*{email}"
-                        class="form-outline form-control-color"
-                        placeholder="E-mail address"
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                        required>
+                type="email"
+                id="email"
+                th:field="*{email}"
+                class="form-outline form-control-color"
+                placeholder="E-mail address"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+
+                >
+<!--                required-->
+
                 <div class="invalid-feedback text-start">
                   Please enter a valid email address
                 </div>
@@ -79,12 +83,34 @@
                         th:field="*{password}"
                         class="form-outline form-control-color"
                         placeholder="Password"
-                        minlength="8"
-                        required>
+
+                >
+<!--                required-->
+                <!--                        minlength="8"-->
+
                 <div class="invalid-feedback text-start">
-                  Password must be at least 8 characters long
+                  The password must contain 8 characters, including an uppercase letter, a number, and a symbol
                 </div>
                 <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger text-start"></div>
+              </div>
+
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input
+                        type="password"
+                        id="confirmPassword"
+                        th:field="*{confirmPassword}"
+                        class="form-outline form-control-color"
+                        placeholder="Confirm Password"
+
+                >
+                <!--                required-->
+                <!--                        minlength="8"-->
+
+                <div class="invalid-feedback text-start">
+                  Passwords must match
+<!--                  Useless field : we'll have to compare 2 fields -> we need to do it in the PasswordMatchValidator-->
+                </div>
+                <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="text-danger text-start"></div>
               </div>
 
               <button
@@ -147,16 +173,29 @@
     });
   })();
 
-  // Social sign-up handlers
-  function signUpWithGoogle() {
-    // Implement Google sign-up logic
-    console.log('Google sign-up clicked');
-  }
+  document.getElementById("signupForm").addEventListener("submit", function(event) {
+    var password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("confirmPassword").value;
 
-  function signUpWithFacebook() {
-    // Implement Facebook sign-up logic
-    console.log('Facebook sign-up clicked');
-  }
+    if (password !== confirmPassword) {
+      event.preventDefault();
+      alert("Passwords do not match!");
+    }
+  });
+
+  // // Social sign-up handlers
+  // function signUpWithGoogle() {
+  //   // Implement Google sign-up logic
+  //   console.log('Google sign-up clicked');
+  // }
+  //
+  // function signUpWithFacebook() {
+  //   // Implement Facebook sign-up logic
+  //   console.log('Facebook sign-up clicked');
+  // }
+
+
+
 </script>
 </body>
 </html>

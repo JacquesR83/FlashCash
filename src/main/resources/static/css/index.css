@@ -46,7 +46,7 @@
 
 /* Style du logo */
 .logo-card img {
-    max-width: 150px;
+    max-width: 300px;
     transition: transform 0.3s ease;
 }
 

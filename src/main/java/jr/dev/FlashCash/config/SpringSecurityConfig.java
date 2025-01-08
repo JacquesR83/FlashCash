@@ -19,7 +19,7 @@ public class SpringSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/signin", "/signup", "/static/**", "/css/**", "/images/**")
+                        .requestMatchers("/signin", "/authentication", "/signup", "/static/**", "/css/**", "/images/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated()
@@ -33,7 +33,9 @@ public class SpringSecurityConfig {
                         .defaultSuccessUrl("/home", true)
                 )
                 // logout access
-                .logout((logout) -> logout.permitAll());
+                .logout((logout) -> logout
+                        .logoutUrl("/logout")
+                        .permitAll());
         return http.build();
     }
 }

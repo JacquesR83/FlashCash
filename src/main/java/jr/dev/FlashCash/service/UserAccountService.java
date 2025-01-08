@@ -1,7 +1,6 @@
 package jr.dev.FlashCash.service;
 
-import jr.dev.FlashCash.repository.UserAccountRepository;
-import jr.dev.FlashCash.repository.UserRepository;
+import jr.dev.FlashCash.interfaces.repository.UserAccountRepository;
 import jr.dev.FlashCash.service.form.AddIbanForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

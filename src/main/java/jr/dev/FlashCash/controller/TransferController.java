@@ -2,7 +2,7 @@ package jr.dev.FlashCash.controller;
 
 import jakarta.validation.Valid;
 import jr.dev.FlashCash.model.Transfer;
-import jr.dev.FlashCash.repository.UserRepository;
+import jr.dev.FlashCash.interfaces.repository.UserRepository;
 import jr.dev.FlashCash.service.LinkService;
 import jr.dev.FlashCash.service.SessionService;
 import jr.dev.FlashCash.service.TransferService;

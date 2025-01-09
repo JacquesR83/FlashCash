@@ -26,8 +26,8 @@
             </div>
 
             <!--            Redirection the error message "authentication failed" -->
-            <div th:if="${authError}" class="text-danger text-start" role="alert">
-              <p th:text="${authError}"></p>
+            <div th:if="${param.authError}" class="text-danger text-start" role="alert">
+              <p> Invalid email or password</p>
             </div>
 
             <form th:action="@{/signin}" method="post" th:object="${signInForm}">

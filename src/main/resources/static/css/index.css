@@ -44,6 +44,11 @@
     transform: translateY(-2px);
 }
 
+.btn-outline-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
 /* Style du logo */
 .logo-card img {
     max-width: 300px;
@@ -59,4 +64,14 @@
     .login-card {
         padding: 2rem 1rem !important;
     }
+
+/* Style pour le tableau des transferts */
+.sender-class {
+    color: red; /* Couleur rouge pour les transferts envoyés */
+    }
+
+.receiver-class {
+    color: green; /* Couleur verte pour les transferts reçus */
+    }
+
 }

@@ -25,24 +25,31 @@
                         <table class="table align-middle mb-0">
                             <thead class="bg-light">
                             <tr>
-                                <th>Id</th>
-                                <th>Amount Before Fee</th>
-                                <th>Amount After Fee</th>
+<!--                                <th>Amount Before Fee</th>-->
                                 <th>Date</th>
+                                <th>Amount</th>
                                 <th>Description</th>
                                 <th>Receiver</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="transfer : ${transfers}">
-                                <td th:text="${transfer.id}"></td>
-                                <td th:text="${transfer.amountBeforeFee}"></td>
-                                <td th:text="${transfer.amountAfterFee}"></td>
-                                <td th:text="${#temporals.format(transfer.dateTime, 'dd-MM-yyyy HH:mm')}"></td>
+                                <td th:text="${#temporals.format(transfer.dateTime, 'dd-MM-yyyy ')}"></td>
+
+                                <!--                                <td>-->
+<!--                                    <span th:text="${user.getId() == transfer.from.getId()}? '-' : '+' "></span>-->
+<!--                                    <span th:text="${transfer.amountBeforeFee}"></span>-->
+<!--                                </td>-->
+                                <td th:class="${user.getId() == transfer.from.getId() ? 'text-danger' : 'text-success'}" >
+<!--                                    Put into the td -> ensures to display field -> a span -> ternary condition in th:text -->
+                                    <span th:text="${user.getId() == transfer.from.getId()}? '-' : '+' "></span>
+                                    <span th:text="${transfer.amountAfterFee}"></span>
+                                </td>
                                 <td th:text="${transfer.description}"></td>
-                                <td th:text="${transfer.to.getFirstname() + ' ' + transfer.to.getLastname()}"></td>
+                                <td th:text="${user.getId() == transfer.to.getId() ? user.account.iban : transfer.from.getFirstname() + ' ' + transfer.from.getLastname()}"></td>
                             </tr>
                             </tbody>
+<!--                            hidden="hidden"-->
                         </table>
                     </div>
                 </div>

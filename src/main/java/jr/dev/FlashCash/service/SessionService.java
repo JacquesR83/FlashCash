@@ -18,10 +18,7 @@ public class SessionService {
     public User sessionUser() {
         org.springframework.security.core.userdetails.User springUser =
                 (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        String email = springUser.getUsername();
-
-        return userRepository.findUserByEmail(email)
+        return userRepository.findUserByEmail(springUser.getUsername())
                 .orElseThrow(() -> new RuntimeException("User with this email cannot be found"));
     }
 }

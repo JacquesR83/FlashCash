@@ -8,6 +8,7 @@ import jr.dev.FlashCash.interfaces.repository.UserRepository;
 import jr.dev.FlashCash.service.form.AddToFlashCashForm;
 import jr.dev.FlashCash.service.form.CashToBankForm;
 import jr.dev.FlashCash.service.form.TransferForm;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,22 +16,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TransferService {
 
     private final UserAccountRepository userAccountRepository;
     private final SessionService sessionService;
     private final TransferRepository transferRepository;
     private final UserRepository userRepository;
-
-
-    @Autowired
-    public TransferService(UserAccountRepository userAccountRepository, SessionService sessionService,
-                           TransferRepository transferRepository, UserRepository userRepository) {
-        this.userAccountRepository = userAccountRepository;
-        this.sessionService = sessionService;
-        this.transferRepository = transferRepository;
-        this.userRepository = userRepository;
-    }
 
     public void transferCashToAccount(AddToFlashCashForm form) {
         if(form != null){
@@ -70,7 +62,8 @@ public class TransferService {
     }
 
     public List<Transfer> findTransactions() {
-        return transferRepository.findTransfersByFrom(sessionService.sessionUser());
+//        return transferRepository.findTransfersByFrom(sessionService.sessionUser());
+        return transferRepository.returnTransfers(sessionService.sessionUser().getId());
     }
 
 
@@ -80,10 +73,8 @@ public class TransferService {
 
 
     public void transferCashToBank(CashToBankForm form) {
-        if(form != null){
-            if(sessionService.sessionUser().getAccount().getIban().equals(form.getIban())){
-                userAccountRepository.save(sessionService.sessionUser().getAccount().minus(form.getAmount()));
-            }
+        if(sessionService.sessionUser().getAccount().getIban().equals(form.getIban())){
+            userAccountRepository.save(sessionService.sessionUser().getAccount().minus(form.getAmount()));
         }
     }
 

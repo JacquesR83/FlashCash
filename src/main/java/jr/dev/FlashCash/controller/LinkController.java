@@ -2,6 +2,7 @@ package jr.dev.FlashCash.controller;
 
 import jr.dev.FlashCash.service.LinkService;
 import jr.dev.FlashCash.service.form.AddLinkForm;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
+@RequiredArgsConstructor
 public class LinkController {
 
     private final LinkService linkService;
-
-    @Autowired
-    public LinkController(LinkService linkService) {
-        this.linkService = linkService;
-    }
 
     private static final Logger logger = LoggerFactory.getLogger(LinkController.class);
 

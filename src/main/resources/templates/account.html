@@ -31,7 +31,7 @@
         <div class="col-md-6">
             <div class="card shadow-2-strong" style="border-radius: 1rem;">
                 <div class="card-body p-4">
-                    <h4 class="fw-bold mb-4">Related Iban</h4>
+                    <h4 class="fw-bold mb-4">Iban</h4>
                     <span class="h5" th:text="${user.getAccount().getIban()}"></span>
                     <span class="text-muted" th:if="${user.getAccount().getIban() == null}">IBAN is not provided</span>
                 </div>

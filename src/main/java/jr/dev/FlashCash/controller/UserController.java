@@ -8,6 +8,7 @@ import jr.dev.FlashCash.model.dto.SignUpForm;
 import jr.dev.FlashCash.service.AuthenticationService;
 import jr.dev.FlashCash.service.SessionService;
 import jr.dev.FlashCash.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,16 +28,11 @@ import java.util.Optional;
 
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
     private final AuthenticationService authenticationService;
-
-    @Autowired
-    public UserController(UserService userService, AuthenticationService authenticationService) {
-        this.userService = userService;
-        this.authenticationService = authenticationService;
-    }
 
     @GetMapping("/signup")
     public ModelAndView showSignUpView() {

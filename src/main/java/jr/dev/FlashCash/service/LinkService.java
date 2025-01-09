@@ -5,6 +5,7 @@ import jr.dev.FlashCash.model.User;
 import jr.dev.FlashCash.interfaces.repository.LinkRepository;
 import jr.dev.FlashCash.interfaces.repository.UserRepository;
 import jr.dev.FlashCash.service.form.AddLinkForm;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,18 +13,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class LinkService {
 
     private final UserRepository userRepository;
     private final SessionService sessionService;
     private final LinkRepository linkRepository;
-
-    @Autowired
-    public LinkService(UserRepository userRepository, SessionService sessionService, LinkRepository linkRepository) {
-        this.userRepository = userRepository;
-        this.sessionService = sessionService;
-        this.linkRepository = linkRepository;
-    }
 
 //    public List<Link> getLinksForUser(User user) {
 //        return linkRepository.findLinksByUser1(user);

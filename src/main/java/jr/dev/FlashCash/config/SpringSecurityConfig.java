@@ -27,10 +27,13 @@ public class SpringSecurityConfig {
                 .formLogin((form) -> form
                         // customized login form
                         .loginPage("/signin")
+//                        .loginProcessingUrl("/authentication") // To go through your postmapping /authentication with spring security own means
                         // username is default field and is changed here (=> checked field in the HTML form login page)
                         .permitAll().usernameParameter("email")
                         // when successful, goes to "/" URL, => always
                         .defaultSuccessUrl("/home", true)
+                        // Add an error code to the URL when login fails
+                        .failureUrl("/signin?authError=true")
                 )
                 // logout access
                 .logout((logout) -> logout

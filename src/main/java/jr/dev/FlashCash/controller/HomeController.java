@@ -6,25 +6,19 @@ import jr.dev.FlashCash.model.User;
 import jr.dev.FlashCash.service.LinkService;
 import jr.dev.FlashCash.service.SessionService;
 import jr.dev.FlashCash.service.TransferService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
 
     private final SessionService sessionService;
     private final LinkService linkService;
     private final TransferService transferService;
-
-    public HomeController(SessionService sessionService,
-                          LinkService linkService,
-                          TransferService transferService) {
-        this.sessionService = sessionService;
-        this.linkService = linkService;
-        this.transferService = transferService;
-    }
 
     @GetMapping("/home")
     public String home(Model model) {

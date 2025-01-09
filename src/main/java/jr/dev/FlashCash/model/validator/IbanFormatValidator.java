@@ -3,6 +3,8 @@ package jr.dev.FlashCash.model.validator;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import jr.dev.FlashCash.interfaces.validatorConstraints.IbanFormat;
+
+import java.math.BigInteger;
 import java.util.regex.Pattern;
 
 public class IbanFormatValidator implements ConstraintValidator <IbanFormat, String> {
@@ -11,7 +13,7 @@ public class IbanFormatValidator implements ConstraintValidator <IbanFormat, Str
     public void initialize(IbanFormat constraintAnnotation) {
     }
 
-    private static final String IBAN_PATTERN = "^[A-Z]{2}\\\\d{2}[A-Z0-9]{8,30}$";
+    private static final String IBAN_PATTERN = "^[A-Z]{2}\\d{2}[A-Z0-9]{8,30}$";
 
     @Override
     public boolean isValid(String iban, ConstraintValidatorContext constraintValidatorContext) {
@@ -68,9 +70,9 @@ public class IbanFormatValidator implements ConstraintValidator <IbanFormat, Str
     }
 
     // Verification for mod97 check
-    private static boolean mod97(String iban){
-        long number = Long.parseLong(iban);
-        return number % 97 == 1;
+    private static boolean mod97(String numericIban){
+        BigInteger ibanBigInt = new BigInteger(numericIban);
+        return ibanBigInt.mod(BigInteger.valueOf(97)).equals(BigInteger.ONE);
     }
 
 

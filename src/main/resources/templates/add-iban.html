@@ -29,9 +29,6 @@
                                        placeholder="Insert your IBAN"/>
                                 <div th:if="${#fields.hasErrors('iban')}" th:errors="*{iban}" class="text-danger text-start"></div>
                             </div>
-                            <div class="invalid-feedback text-start">
-                                Provided IBAN is not valid
-                            </div>
 
                             <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Add IBAN</button>
                             <button href="/home" type="button" onclick="window.location.href='/home'" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-lg btn-block" >Cancel</button>

@@ -13,8 +13,16 @@ public interface UserRepository extends JpaRepository <User, Integer>,JpaSpecifi
     // Methode 1 - JPA magic => by the name of our method, SQL request is made by JPA
     Optional<User> findUserByEmail(String s);
 
+
+
+
     boolean existsByEmail(String email);
 
+
+
+
+
+    //EXAMPLES OF STOCKED PROCEDURE
     // JPA can't execute 2 requests at the same time for a stocked procedure
     // 1) Executes Stocked Procedure passing email and saving password in "@userPassword" variable in DB
     @Query(value = "CALL PS_Password(:email, @userPassword);", nativeQuery = true)
@@ -23,6 +31,8 @@ public interface UserRepository extends JpaRepository <User, Integer>,JpaSpecifi
     //2) Get password already stocked in the defined stocked procedure variable "@userPassword" (this one stays as long as user is connected)
     @Query(value = "SELECT @userPassword", nativeQuery = true)
     String getPasswordFromStoredProcedure();
+
+
 
 
 //    @Query(value= "CALL PS_Links(:userId)", nativeQuery = true)

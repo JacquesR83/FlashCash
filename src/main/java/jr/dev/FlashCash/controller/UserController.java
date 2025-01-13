@@ -15,11 +15,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -54,13 +53,14 @@ public class UserController {
             redirectAttributes.addFlashAttribute("emailError","Email already exists");
             return new ModelAndView( "redirect:/signin");
         }
-        return new ModelAndView("signin", "signUpForm", form);
+        return new ModelAndView("signin", "signInForm", form);
     }
 
     @GetMapping("/signin")
     public ModelAndView showSignInView() {
         return new ModelAndView ("signin", "signInForm", new SignInForm());
     }
+
 //
 //    @PostMapping("/authentication")
 //    public ModelAndView processSignIn(@Valid @ModelAttribute("signInForm") SignInForm form,
@@ -106,15 +106,15 @@ public class UserController {
         return new ModelAndView ("logout");
     }
 
-    @GetMapping("/delete-toto-users")
-    public String deleteTotoUsers() {
-        try {
-            userService.deleteTotoUsers();
-            return "redirect:/account?success=true"; // redirige vers une page de succès
-        } catch (Exception e) {
-            return "redirect:/account?error=true"; // redirige vers une page d'erreur en cas de problème
-        }
-    }
+//    @GetMapping("/delete-toto-users")
+//    public String deleteTotoUsers() {
+//        try {
+//            userService.deleteTotoUsers();
+//            return "redirect:/account?success=true"; // redirige vers une page de succès
+//        } catch (Exception e) {
+//            return "redirect:/account?error=true"; // redirige vers une page d'erreur en cas de problème
+//        }
+//    }
 
 
 }

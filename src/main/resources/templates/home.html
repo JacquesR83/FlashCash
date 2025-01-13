@@ -43,14 +43,14 @@
                     <div class="card shadow-2-strong mb-4" style="border-radius: 1rem;">
                         <div class="card-body p-5 text-center">
                             <h4 class="mb-4 fw-bold border-bottom-0">WELCOME TO FLASHCASH</h4>
-                            <span class="h3" th:text="${user.getFirstname()}">  </span>
-                            <span class="h3" th:text="${user.getLastname()}">  </span>
+                            <span class = h3 th:if="${user != null}" th:text="${user.getFirstname()}"> </span>
+                            <span class = h3 th:if="${user != null}" th:text="${user.getLastname()}"> </span>
 <!--                            <div class="d-flex flex-column gap-2">-->
 <!--                                <a href="/transfers" class="btn btn-primary shadow-1">Transfer history</a>-->
 <!--                            </div>-->
                             <div class="card-body p-5 text-center">
                                 <h4 class="mb-4 fw-bold">Current Balance</h4>
-                                <span class="h3" th:text="${user.getAccount().getAmount()}">  </span>
+                                <span class = h3 th:if="${user != null}" th:text="${user.getAccount().getAmount()}"> </span>
                             </div>
                         </div>
                     </div>

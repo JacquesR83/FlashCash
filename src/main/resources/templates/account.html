@@ -32,15 +32,15 @@
                     <h4 class="fw-bold mb-4">Balance</h4>
                     <span class="h3" th:text="${user.getAccount().getAmount()}"></span>
 
-                    <div th:if="${param.success}">
-                        <p class="alert alert-success">Les utilisateurs 'toto' ont été supprimés avec succès.</p>
-                    </div>
+<!--                    <div th:if="${param.success}">-->
+<!--                        <p class="alert alert-success">Les utilisateurs 'toto' ont été supprimés avec succès.</p>-->
+<!--                    </div>-->
 
-                    <!-- Message d'erreur -->
-                    <div th:if="${param.error}">
-                        <p class="alert alert-danger">Une erreur est survenue lors de la suppression des utilisateurs 'toto'.</p>
-                    </div>
-                    <a href="/delete-toto-users" class="btn btn-danger">Supprimer tous les utilisateurs 'toto'</a>
+<!--                    &lt;!&ndash; Message d'erreur &ndash;&gt;-->
+<!--                    <div th:if="${param.error}">-->
+<!--                        <p class="alert alert-danger">Une erreur est survenue lors de la suppression des utilisateurs 'toto'.</p>-->
+<!--                    </div>-->
+<!--                    <a href="/delete-toto-users" class="btn btn-danger">Supprimer tous les utilisateurs 'toto'</a>-->
 
                 </div>
             </div>
@@ -68,15 +68,16 @@
                             <tr>
                                 <th>Firstname</th>
                                 <th>Lastname</th>
+                                <th></th> <!-- Empty Column for remove button -->
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="connectedPerson : ${links}">
                                 <td th:text="${connectedPerson.user2.firstname}"></td>
                                 <td th:text="${connectedPerson.user2.lastname}"></td>
-                                <td>
+                                <td class="text-end">
                                     <form th:action="@{/remove-link/{friendId}(friendId=${connectedPerson.user2.id})}" method="post">
-                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                        <button type="submit" class="btn btn-danger">Remove Connection</button>
                                     </form>
                                 </td>
                             </tr>

@@ -2,6 +2,7 @@ package jr.dev.FlashCash.service;
 
 import jr.dev.FlashCash.controller.exceptions.CannotAddSelfException;
 import jr.dev.FlashCash.controller.exceptions.LinkAlreadyExistsException;
+import jr.dev.FlashCash.controller.exceptions.UserNotFoundException;
 import jr.dev.FlashCash.model.Link;
 import jr.dev.FlashCash.model.User;
 import jr.dev.FlashCash.interfaces.repository.LinkRepository;
@@ -41,9 +42,9 @@ public class LinkService {
 //        if(userRepository.findUserByEmail(form.getEmail()).isEmpty()){
 //            throw new RuntimeException("Invalid email, cannot add link");
 //        }
-        User friend = userRepository
-                .findUserByEmail(form.getEmail())
-                .orElseThrow(()-> new RuntimeException("User with email " + form.getEmail() + " not found"));
+        User friend = userRepository.findUserByEmail(form.getEmail())
+                .orElseThrow(() -> new UserNotFoundException("The user you are trying to add does not exist."));
+
         User connectedUser = sessionService.sessionUser();
 
         List<Link> existingLink = linkRepository.findLinkByUser1AndUser2StoredProcedure(connectedUser.getId(),friend.getId());

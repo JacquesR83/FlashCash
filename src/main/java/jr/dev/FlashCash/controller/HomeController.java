@@ -24,6 +24,11 @@ public class HomeController {
     public String home(Model model) {
 
         User user = sessionService.sessionUser();
+        List<Link> links = linkService.getLinksForUser(user);
+        List <Transfer> transfers = transferService.findTransactions();
+
+        model.addAttribute("links",links);
+        model.addAttribute("transfers", transfers);
         model.addAttribute("user", user);
         return "home";
     }

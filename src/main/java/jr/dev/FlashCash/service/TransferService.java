@@ -66,11 +66,9 @@ public class TransferService {
         return transferRepository.returnTransfers(sessionService.sessionUser().getId());
     }
 
-
     public Double applyFee(Double amount) {
         return amount * 0.995;
     }
-
 
     public void transferCashToBank(CashToBankForm form) {
         if(sessionService.sessionUser().getAccount().getIban().equals(form.getIban())){
@@ -79,6 +77,11 @@ public class TransferService {
     }
 
     public String findIban() {
-        return sessionService.sessionUser().getAccount().getIban();
+         try {
+             return sessionService.sessionUser().getAccount().getIban();
+         }
+            catch (NullPointerException ex){
+                return "No IBAN found";
+            }
     }
 }

@@ -1,5 +1,6 @@
 package jr.dev.FlashCash;
 
+import jr.dev.FlashCash.config.MvcConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +9,7 @@ public class FlashCashApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FlashCashApplication.class, args);
+
 	}
 
 }

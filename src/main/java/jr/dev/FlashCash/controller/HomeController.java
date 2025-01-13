@@ -34,6 +34,7 @@ public class HomeController {
         User user = sessionService.sessionUser();
         List<Link> links = linkService.getLinksForUser(user);
         List <Transfer> transfers = transferService.findTransactions();
+
         model.addAttribute("user", user);
         model.addAttribute("links",links);
         model.addAttribute("transfers", transfers);

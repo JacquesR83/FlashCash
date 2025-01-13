@@ -46,7 +46,7 @@
                                     <span th:text="${transfer.amountAfterFee}"></span>
                                 </td>
                                 <td th:text="${transfer.description}"></td>
-                                <td th:text="${user.getId() == transfer.to.getId() ? user.account.iban : transfer.from.getFirstname() + ' ' + transfer.from.getLastname()}"></td>
+                                <td th:text="${user.getId() == transfer.to.getId() ? user.account.iban : transfer.to.getFirstname() + ' ' + transfer.to.getLastname()}"></td>
                             </tr>
                             </tbody>
 <!--                            hidden="hidden"-->

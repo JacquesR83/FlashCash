@@ -106,5 +106,15 @@ public class UserController {
         return new ModelAndView ("logout");
     }
 
+    @GetMapping("/delete-toto-users")
+    public String deleteTotoUsers() {
+        try {
+            userService.deleteTotoUsers();
+            return "redirect:/account?success=true"; // redirige vers une page de succès
+        } catch (Exception e) {
+            return "redirect:/account?error=true"; // redirige vers une page d'erreur en cas de problème
+        }
+    }
+
 
 }

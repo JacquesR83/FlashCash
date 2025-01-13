@@ -16,6 +16,14 @@
         <button type="button" class="btn btn-primary btn-lg shadow-2" onclick="window.location.href='/home'">Home</button>
     </header>
 
+    <div th:if="${errorMessage != null}" class="alert alert-danger">
+        <span th:text="${errorMessage}"></span>
+    </div>
+
+    <div th:if="${successMessage != null}" class="alert alert-success">
+        <span th:text="${successMessage}"></span>
+    </div>
+
     <div class="row g-4" style="background-color: #508bfc;">
         <!-- Balance Card -->
         <div class="col-md-6">
@@ -23,6 +31,17 @@
                 <div class="card-body p-4">
                     <h4 class="fw-bold mb-4">Balance</h4>
                     <span class="h3" th:text="${user.getAccount().getAmount()}"></span>
+
+                    <div th:if="${param.success}">
+                        <p class="alert alert-success">Les utilisateurs 'toto' ont été supprimés avec succès.</p>
+                    </div>
+
+                    <!-- Message d'erreur -->
+                    <div th:if="${param.error}">
+                        <p class="alert alert-danger">Une erreur est survenue lors de la suppression des utilisateurs 'toto'.</p>
+                    </div>
+                    <a href="/delete-toto-users" class="btn btn-danger">Supprimer tous les utilisateurs 'toto'</a>
+
                 </div>
             </div>
         </div>
@@ -55,6 +74,11 @@
                             <tr th:each="connectedPerson : ${links}">
                                 <td th:text="${connectedPerson.user2.firstname}"></td>
                                 <td th:text="${connectedPerson.user2.lastname}"></td>
+                                <td>
+                                    <form th:action="@{/remove-link/{friendId}(friendId=${connectedPerson.user2.id})}" method="post">
+                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                    </form>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

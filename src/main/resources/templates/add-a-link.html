@@ -19,6 +19,9 @@
               <img class="w-25 pb-3" th:src="@{/css/images/logo.png}" alt="Logo" />
             </div>
             <h2 class="card-title text-center mb-5 fw-bold fs-5">Add a link </h2>
+            <div th:if="${errorMessage!= null}" class="alert-danger">
+              <span th:text="${errorMessage}"></span>
+            </div>
 
             <form th:action="@{/add-link}" th:object="${addLinkForm}" method="POST">
 
@@ -27,6 +30,8 @@
                        id="floatingInputAmount"
                        class="form-outline form-control-color"
                        placeholder="Add a new link"/>
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger text-start"></div>
+
               </div>
 
               <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Create a new link</button>

@@ -20,6 +20,10 @@
             </div>
             <h2 class="card-title text-center mb-5 fw-bold fs-5"> Withdraw cash </h2>
 
+            <div th:if="${errorMessage!= null}" class="alert-danger">
+              <span th:text="${errorMessage}"></span>
+            </div>
+
             <form th:action="@{/cash-to-bank}" th:object="${cashToBankForm}" method="POST">
 
               <select th:field="*{iban}" required>
@@ -29,6 +33,7 @@
                         th:value="${accountIban}"
                         th:utext="${accountIban}">
                 </option>
+                <div th:if="${#fields.hasErrors('iban')}" th:errors="*{iban}" class="text-danger text-start"></div>
               </select>
 
               <div data-mdb-input-init class="form-outline mb-4">
@@ -37,7 +42,6 @@
                        class="form-outline form-control-color"
                        placeholder="Amount"
                        step="0.01"
-                       required
                 />
               </div>
 

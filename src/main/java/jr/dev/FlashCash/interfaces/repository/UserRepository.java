@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository <User, Integer>,JpaSpecificationExecutor<User>{
@@ -32,7 +33,10 @@ public interface UserRepository extends JpaRepository <User, Integer>,JpaSpecifi
     @Query(value = "SELECT @userPassword", nativeQuery = true)
     String getPasswordFromStoredProcedure();
 
+    List<User> findByFirstname(String toto);
 
+    @Query("SELECT u FROM User u WHERE u IN (SELECT l.user1 FROM Link l WHERE l.user2 = :totoUser) OR u IN (SELECT l.user2 FROM Link l WHERE l.user1 = :totoUser)")
+    List<User> findUsersLinkedToToto(@Param("totoUser") User totoUser);
 
 
 //    @Query(value= "CALL PS_Links(:userId)", nativeQuery = true)

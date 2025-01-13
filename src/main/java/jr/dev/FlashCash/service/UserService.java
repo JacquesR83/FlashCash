@@ -26,7 +26,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final LinkRepository linkRepository;
 
     public User registration(SignUpForm form){
 
@@ -46,41 +45,6 @@ public class UserService {
             user.setPassword(passwordEncoder.encode(form.getPassword()));
             return userRepository.save(user);
     }
-
-
-//    @Transactional
-//    public void deleteTotoUsers() {
-//        // Récupérer les utilisateurs avec le prénom "toto"
-//        List<User> totoUsers = userRepository.findByFirstname("toto");
-//
-//        // Supprimer les liens où Toto apparaît comme user1 ou user2
-//        for (User totoUser : totoUsers) {
-//            // Trouver les liens où Toto est user1 ou user2
-//            List<Link> linksAsUser1 = linkRepository.findLinksByUser1(totoUser);  // Liens où Toto est user1
-//            List<Link> linksAsUser2 = linkRepository.findLinksByUser2(totoUser);  // Liens où Toto est user2
-//
-//            // Combiner les deux listes de liens
-//            linksAsUser1.addAll(linksAsUser2);
-//
-//            // Supprimer tous les liens associés à Toto
-//            linkRepository.deleteAll(linksAsUser1);
-//        }
-//
-//        // Supprimer les utilisateurs "Toto"
-//        for (User totoUser : totoUsers) {
-//            userRepository.delete(totoUser);
-//        }
-//
-//        // Maintenant, supprimer tous les liens pour les autres utilisateurs liés à Toto
-//        for (User totoUser : totoUsers) {
-//            // Supprimer tous les liens où Toto était impliqué (même en tant que user2)
-//            List<User> usersLinkedToToto = userRepository.findUsersLinkedToToto(totoUser);
-//            for (User user : usersLinkedToToto) {
-//                List<Link> linksToDelete = linkRepository.findByUser1OrUser2(user, totoUser);
-//                linkRepository.deleteAll(linksToDelete);
-//            }
-//        }
-//    }
 
 
 //

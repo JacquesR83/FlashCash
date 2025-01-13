@@ -24,10 +24,4 @@ public interface LinkRepository extends JpaRepository<Link, Integer> {
     @Query("SELECT l FROM Link l WHERE l.user1.id = :userId")
     List<Link> findLinksByUserId(@Param("userId") Integer userId);
 
-    List<Link> findLinksByUser1(User totoUser);
-
-    List<Link> findLinksByUser2(User totoUser);
-
-    List<Link> findByUser1OrUser2(User user1, User user2);
-
 }

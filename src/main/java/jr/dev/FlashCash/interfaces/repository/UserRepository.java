@@ -15,12 +15,7 @@ public interface UserRepository extends JpaRepository <User, Integer>,JpaSpecifi
     Optional<User> findUserByEmail(String s);
 
 
-
-
     boolean existsByEmail(String email);
-
-
-
 
 
     //EXAMPLES OF STOCKED PROCEDURE
@@ -32,11 +27,6 @@ public interface UserRepository extends JpaRepository <User, Integer>,JpaSpecifi
     //2) Get password already stocked in the defined stocked procedure variable "@userPassword" (this one stays as long as user is connected)
     @Query(value = "SELECT @userPassword", nativeQuery = true)
     String getPasswordFromStoredProcedure();
-
-    List<User> findByFirstname(String toto);
-
-    @Query("SELECT u FROM User u WHERE u IN (SELECT l.user1 FROM Link l WHERE l.user2 = :totoUser) OR u IN (SELECT l.user2 FROM Link l WHERE l.user1 = :totoUser)")
-    List<User> findUsersLinkedToToto(@Param("totoUser") User totoUser);
 
 
 //    @Query(value= "CALL PS_Links(:userId)", nativeQuery = true)
